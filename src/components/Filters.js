@@ -11,8 +11,8 @@ const Filters = () => {
   // make state for rating
 
   return (
-    <div className="filters">
-      <span className="title">Filter Products</span>
+    <div className="container">
+      
       <span>
         <Form.Check
           inline
@@ -89,7 +89,7 @@ const Filters = () => {
         />
       </span>
       <Button
-        variant="light"
+        variant="primary"
         onClick={() =>
           productDispatch({
             type: "CLEAR_FILTERS",

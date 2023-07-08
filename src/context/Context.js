@@ -10,6 +10,7 @@ const Context = ({ children }) => {
     id: faker.datatype.uuid(),
     name: faker.commerce.productName(),
     price: (parseFloat(faker.commerce.price()) * 1000).toFixed(2),
+    description: faker.lorem.paragraph(),
     image: 'https://d3ski4a8qseigv.cloudfront.net/sokoni',
     inStock: faker.random.arrayElement([0, 3, 5, 6, 7]),
     fastDelivery: faker.datatype.boolean(),

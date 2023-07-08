@@ -1,20 +1,11 @@
-import { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  IconButton,
-  Typography,
-  CardMedia,
-  CardContent,
-  CardActions,
-} from "@material-ui/core";
-
+import React, { useState } from "react";
+import { Card, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { CartState } from "../context/Context";
+import Rating from "./Rating";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
-import { Link, useHistory } from "react-router-dom";
-import { CartState } from "../context/Context";
-import Rating from "./Rating";
 
 const SingleProduct = ({ prod }) => {
   const history = useHistory();
@@ -37,100 +28,70 @@ const SingleProduct = ({ prod }) => {
   };
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        title={
-          <Typography
-            variant="subtitle1"
-            color="text.primary"
-            style={{ fontSize: "15px", fontWeight: "bold" }}
-          >
-            {prod && prod.name}
-          </Typography>
-        }
-        subheader={
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            style={{ color: "green" }}
-          >
-            Tshs. {prod && prod.price.split(".")[0]}
-          </Typography>
-        }
-      />
-      <a href="/proddetails" style={{ textDecoration: "none" }}>
-        <CardMedia
-          component="img"
-          height="194"
-          image={prod && prod.image}
-          alt="prod Image"
-          style={{ width: "100%" }}
-        />
-      </a>
-      <CardContent
-        sx={{
-       
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography variant="body2" color="text.primary" align="center">
-          This section will be occupied by a short description of the product. The description will be very short.
-          This section will be occupied by a short description of the product. The description will be very short.
-        </Typography>
-      </CardContent>
-      <div className="row" style={{ justifyContent: "center" }}>
-    <Rating rating={prod.ratings} />
-  </div>
-
-  
-    {!prod.inStock ? (
-      <div className="row" style={{ justifyContent: "center" }}>
-      <Typography
-        variant="body2"
-        color="text.primary"
-        align="center"
-        style={{ color: "red" }}
-      >
-        Out of Stock
-      </Typography>
-        </div>
-      ) : (
-        <div className="row" style={{ justifyContent: "center" }}>
-        <CardActions disableSpacing>
-          {cart.some((p) => p.id === prod.id) ? (
-            <IconButton
-              aria-label="remove from cart"
-              onClick={() =>
-                dispatch({
-                  type: "REMOVE_FROM_CART",
-                  payload: prod,
-                })
-              }
-            >
-              <RemoveShoppingCartIcon style={{ color: "red" }} />
-            </IconButton>
+    <Card>
+      <br/>
+      <Card.Title className="container" style={{fontSize: '16px', fontWeight: 'bold'}}>{prod && prod.name}</Card.Title>
+      <Card.Subtitle className="mb-2 container" style={{color: 'green'}}>
+        Tshs. {prod && prod.price.split(".")[0]}
+      </Card.Subtitle>
+      
+      <Card.Body>
+      <a onClick={()=>{history.push(`/product-details/${prod.id}`);}}>
+        <img src={prod.image} className="img-fluid"/>
+        <Card.Text style={{height: '5rem', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '13px'}}>
+          {prod && prod.description}
+        </Card.Text>
+        
+        <div className="d-flex justify-content-between" style={{scale: '90%'}}>
+          <Rating rating={prod.ratings}/>
+          {prod.fastDelivery ? (
+            <p>Fast Delivery</p>
           ) : (
-            <IconButton
-              aria-label="add to cart"
-              onClick={() =>
-                dispatch({
-                  type: "ADD_TO_CART",
-                  payload: prod,
-                })
-              }
-            >
-              <AddShoppingCartIcon style={{ color: "blue" }} />
-            </IconButton>
+            <p>4-day Delivery</p>
           )}
-          <IconButton aria-label="buy now" onClick={handleBuyNowClick}>
-            <MonetizationOnIcon style={{ color: "green" }}/>
-          </IconButton>
-        </CardActions>
         </div>
-      )}
+        </a>
+        {!prod.inStock ? (
+
+          <div className="text-danger d-flex justify-content-center" >Out of Stock</div>
+        ) : (
+          <div className="d-flex justify-content-center">
+            {cart.some((p) => p.id === prod.id) ? (
+              <RemoveShoppingCartIcon
+                variant="danger"
+                onClick={() =>
+                  dispatch({
+                    type: "REMOVE_FROM_CART",
+                    payload: prod,
+                  })
+                }
+                style={{color: 'red'}}
+              >
+              </RemoveShoppingCartIcon>
+            ) : (
+              <AddShoppingCartIcon
+                variant="primary"
+                onClick={() =>
+                  dispatch({
+                    type: "ADD_TO_CART",
+                    payload: prod,
+                  })
+                }
+                style={{color: '#2dace4'}}
+              >
+              </AddShoppingCartIcon>
+            )}
+            <MonetizationOnIcon
+              variant="success"
+              onClick={handleBuyNowClick}
+              className="ms-2"
+              style={{ marginLeft: "20px", color: 'green' }}
+            >
+            </MonetizationOnIcon>
+          </div>
+        )}
+      </Card.Body>
+      
     </Card>
   );
 };
