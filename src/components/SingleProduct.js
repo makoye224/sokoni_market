@@ -36,7 +36,13 @@ const SingleProduct = ({ prod }) => {
       </Card.Subtitle>
       
       <Card.Body>
-      <a onClick={()=>{history.push(`/product-details/${prod.id}`);}}>
+      <a
+  onClick={() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+    history.push(`/product-details/${prod.id}`);
+  }}
+  style={{ cursor: "pointer" }}
+>
         <img src={prod.image} className="img-fluid"/>
         <Card.Text style={{height: '5rem', overflow: 'hidden', textOverflow: 'ellipsis', fontSize: '13px'}}>
           {prod && prod.description}

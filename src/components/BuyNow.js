@@ -38,6 +38,7 @@ const BuyNow = () => {
               state: { total: product.price }, 
             }}
             className="w-100"
+            style={{backgroundColor: '#2dace4'}}
           >
             Proceed to Checkout
           </Button>

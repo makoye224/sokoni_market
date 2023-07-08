@@ -35,7 +35,7 @@ const MobilePayment = () => {
 
         {/* Add more form inputs for additional mobile payment details as needed */}
 
-        <Button variant="primary" type="submit">Pay With Moble Money</Button>
+        <Button variant="default" type="submit" style={{backgroundColor: '#2dace4'}}>Pay With Moble Money</Button>
       </Form>
     </div>
   );

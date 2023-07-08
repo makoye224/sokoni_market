@@ -57,7 +57,7 @@ const Shipping = () => {
             onChange={(event) => setZipCode(event.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="default" type="submit" style={{backgroundColor: '#2dace4'}}>
           Submit
         </Button>
       </Form>

@@ -89,12 +89,13 @@ const Filters = () => {
         />
       </span>
       <Button
-        variant="primary"
+        variant="default"
         onClick={() =>
           productDispatch({
             type: "CLEAR_FILTERS",
           })
         }
+        style={{backgroundColor: '#2dace4'}}
       >
         Clear Filters
       </Button>

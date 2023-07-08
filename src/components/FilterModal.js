@@ -24,7 +24,7 @@ const FilterModal = () => {
         <Filters/>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="default" onClick={handleClose} style={{backgroundColor: '#2dace4'}}>
           Close
         </Button>
       </Modal.Footer>
