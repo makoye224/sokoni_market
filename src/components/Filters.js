@@ -1,19 +1,27 @@
 import { Button, Form } from "react-bootstrap";
 import { CartState } from "../context/Context";
 import Rating from "./Rating";
+import { Label } from "@material-ui/icons";
 
-const Filters = () => {
+const Filters = ({close}) => {
   const {
     productDispatch,
     productState: { byStock, byFastDelivery, sort, byRating },
   } = CartState();
 
-  // make state for rating
+  const handleClick = ()=>{
+      productDispatch({
+        type: "CLEAR_FILTERS",
+      })
+      close()
+}
 
   return (
     <div className="container">
+
+      <label>Order</label>
       
-      <span>
+      <div>
         <Form.Check
           inline
           label="Ascending"
@@ -28,8 +36,8 @@ const Filters = () => {
           }
           checked={sort === "lowToHigh" ? true : false}
         />
-      </span>
-      <span>
+      </div>
+      <div>
         <Form.Check
           inline
           label="Descending"
@@ -44,8 +52,24 @@ const Filters = () => {
           }
           checked={sort === "highToLow" ? true : false}
         />
-      </span>
-      <span>
+      </div>
+      <br/>
+      <div>
+        <label style={{ paddingRight: 10 }}>Rating: </label>
+        <Rating
+          rating={byRating}
+          onClick={(i) =>
+            productDispatch({
+              type: "FILTER_BY_RATING",
+              payload: i + 1,
+            })
+          }
+          style={{ cursor: "pointer" }}
+        />
+      </div>
+      <br/>
+      <label>Other</label>
+      <div>
         <Form.Check
           inline
           label="Include Out of Stock"
@@ -59,8 +83,8 @@ const Filters = () => {
           }
           checked={byStock}
         />
-      </span>
-      <span>
+      </div>
+      <div>
         <Form.Check
           inline
           label="Fast Delivery Only"
@@ -74,27 +98,11 @@ const Filters = () => {
           }
           checked={byFastDelivery}
         />
-      </span>
-      <span>
-        <label style={{ paddingRight: 10 }}>Rating: </label>
-        <Rating
-          rating={byRating}
-          onClick={(i) =>
-            productDispatch({
-              type: "FILTER_BY_RATING",
-              payload: i + 1,
-            })
-          }
-          style={{ cursor: "pointer" }}
-        />
-      </span>
+      </div>
+      <br/>
       <Button
         variant="default"
-        onClick={() =>
-          productDispatch({
-            type: "CLEAR_FILTERS",
-          })
-        }
+        onClick= {handleClick}
         style={{backgroundColor: '#2dace4'}}
       >
         Clear Filters

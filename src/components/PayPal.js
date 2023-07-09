@@ -30,7 +30,7 @@ const PayPal = () => {
             onChange={(event) => setEmail(event.target.value)}
           />
         </Form.Group>
-        <Button variant="default" type="submit" style={{backgroundColor: '#2dace4'}}>
+        <Button variant="default" type="submit" style={{backgroundColor: '#2dace4', color: 'white'}}>
           Pay with PayPal
         </Button>
       </Form>

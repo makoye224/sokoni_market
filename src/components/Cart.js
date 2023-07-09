@@ -4,6 +4,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { CartState } from "../context/Context";
 import Rating from "./Rating";
 import { Link } from "react-router-dom";
+import Home from "./Home";
 
 const Cart = () => {
   const {
@@ -21,10 +22,12 @@ const Cart = () => {
   return (
     <>
       {cart.length === 0 ? (
-        <h4 className="container">Please add items to the cart.</h4>
+        <><hr /><h4 className="container d-flex justify-content-center">Please add items to the cart.</h4>
+        <Home/>
+        </>
       ) : (
-        <div className="home">
-          <div className="productContainer">
+        <div className="home row">
+          <div className="productContainer col-md-6 container">
             <ListGroup>
               {cart.map((prod) => (
                 <ListGroup.Item key={prod.id}>
@@ -78,27 +81,38 @@ const Cart = () => {
               ))}
             </ListGroup>
           </div>
-          <div className="filters summary">
-            <span className="title">Subtotal ({cart.length}) items</span>
-            <span style={{ fontWeight: 700, fontSize: 20 }}>
+          <div className="filters summary col-md-6 container">
+            <h3 className="title container">Subtotal ({cart.length}) items</h3>
+            <hr/>
+            <div style={{ fontWeight: 700, fontSize: 20 }} className="container">
               Total: Tshs. {total}
-            </span>
+            </div>
+            <br/>
+            <div className="container">
             <Button
-              type="button"
-              disabled={cart.length === 0}
-              as={Link}
-              to={{
-                pathname: "/checkout",
-                state: { total: total}, 
-              }}
-            >
-              Proceed to Checkout
-            </Button>
+            type="button"
+            disabled={cart.length === 0}
+            as={Link}
+            variant='default'
+            to={{
+              pathname: "/checkout",
+              state: { total: total}, 
+            }}
+            style={{backgroundColor: '#2dace4', borderRadius: '1rem', color: "white"}}
+          >
+            Proceed to Checkout
+          </Button>
+            </div>
             <br />
-            <div>
-              <h5>We Accept the following payment methods</h5>
+            <div className="container">
+              <p>We accept the following payment methods</p>
               <li>Credit Card</li>
+              <li>Debit Card</li>
               <li>Mpesa</li>
+              <li>Airtel Money</li>
+              <li>Tigo Pesa</li>
+              <li>Halo Pesa</li>
+              <li>Paypal</li>
             </div>
           </div>
         </div>

@@ -74,50 +74,62 @@ const getSimilarProducts = () => {
         <h5>{product && product.name}</h5>
       <div className="row">
 
-      <div className="col-md-4">
+      <div className="col-md-4 mb-3">
     <div style={{ maxHeight: '600px', overflow: '' }}>
       <img
         src={selectedImage}
         alt="product-photo"
-        style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+        style={{ objectFit: 'contain', width: '100%', height: '100%', borderRadius: '1rem' }}
         className='img-fluid'
       />
     </div>
   </div>
-<div className='col-md-6'>
+<div className='col-md-6 mb-3'>
     <div>
       {!product.inStock ? (
         <p className="text-danger">Out of Stock</p>
       ) : (
         <div className="d-flex justify-content-center">
           {cart.some((p) => p.id === product.id) ? (
-            <><RemoveShoppingCartIcon
-                        variant="danger"
-                        onClick={() => dispatch({
-                          type: "REMOVE_FROM_CART",
-                          payload: product,
-                        })}
-                        style={{ color: 'red' }} /></>
-          ) : (
-            <><AddShoppingCartIcon
-                          variant="primary"
-                          onClick={() => dispatch({
-                            type: "ADD_TO_CART",
-                            payload: product,
-                          })}
-                          style={{ color: '#2dace4' }} /></>
-          )}
-          <MonetizationOnIcon
-            variant="success"
-            onClick={handleBuyNowClick}
-            className="ms-2"
-            style={{ marginLeft: "20px", color: 'green' }}
-          />
+             <Button
+             variant="default"
+             onClick={() =>
+               dispatch({
+                 type: "REMOVE_FROM_CART",
+                 payload: product,
+               })
+             }
+             style={{backgroundColor: 'red', borderRadius: '1rem'}}
+           >
+             Remove From Cart
+           </Button>
+         ) : (
+           <Button
+             variant="default"
+             onClick={() =>
+               dispatch({
+                 type: "ADD_TO_CART",
+                 payload: product,
+               })
+             }
+             style={{backgroundColor: '#2dace4', borderRadius: '1rem', color: 'white'}}
+           >
+             Add to Cart
+           </Button>
+         )}
+         <Button
+           variant="success"
+           onClick={handleBuyNowClick}
+           style={{ marginLeft: "20px", borderRadius: '1rem' }}
+         >
+           Buy Now
+         </Button>
         </div>
       )}
     </div>
 
     <div>
+      <br/>
       <span style={{ marginRight: "10px", color: "blue" }}>
         <a style={{color: '#2dace4'}} href='#'>visit store</a>
       </span>
@@ -175,7 +187,7 @@ const getSimilarProducts = () => {
               to={{
                 pathname: "/cart",
               }}
-              style={{backgroundColor: '#2dace4'}}
+              style={{backgroundColor: '#2dace4', borderRadius: '1rem'}}
             >
              Go to Cart
             </Button>
@@ -185,11 +197,11 @@ const getSimilarProducts = () => {
       </div>
 
       <Container>
-      <hr />
+    
   <h5 className='container'>Similar Products</h5>
   <Row>
-    {similarProducts.slice(0, 10).map((prod) => (
-      <Col key={prod.id} lg={3} md={4} xs={6}>
+    {similarProducts.slice(0, 12).map((prod) => (
+      <Col key={prod.id} lg={4} md={6} xs={12}>
         <SingleProduct prod={prod} />
         <br />
       </Col>
@@ -200,8 +212,8 @@ const getSimilarProducts = () => {
   <h5>Other Products</h5>
   <hr />
   <Row>
-    {differentProducts.slice(0, 10).map((prod) => (
-      <Col key={prod.id} lg={3} md={4} xs={6}>
+    {differentProducts.slice(0, 12).map((prod) => (
+      <Col key={prod.id} lg={4} md={6} xs={12}>
         <SingleProduct prod={prod} />
         <br />
       </Col>

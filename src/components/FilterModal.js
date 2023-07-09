@@ -12,7 +12,7 @@ const FilterModal = () => {
 
   return (
     <>
-    <Button variant="#2dace4" style={{backgroundColor: '#2dace4'}} onClick={handleShow}>
+    <Button variant="#2dace4" style={{backgroundColor: '#2dace4', borderRadius: '1rem'}} onClick={handleShow}>
       Filter Products
     </Button>
 
@@ -21,12 +21,9 @@ const FilterModal = () => {
         <Modal.Title>Filter Products</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Filters/>
+        <Filters close = {handleClose}/>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="default" onClick={handleClose} style={{backgroundColor: '#2dace4'}}>
-          Close
-        </Button>
       </Modal.Footer>
     </Modal>
   </>

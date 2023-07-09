@@ -35,7 +35,7 @@ const CardPayment = () => {
 
         {/* Add more form inputs for additional card payment details as needed */}
 
-        <Button variant="default" type="submit" style={{backgroundColor: '#2dace4'}}>Pay With Card</Button>
+        <Button variant="default" type="submit" style={{backgroundColor: '#2dace4', color: 'white'}}>Pay With Card</Button>
       </Form>
     </div>
   );

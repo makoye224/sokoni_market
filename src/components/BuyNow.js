@@ -20,30 +20,24 @@ const BuyNow = () => {
           </Col>
           <Col md={8}>
             <h2>{product.name}</h2>
-            <p>Price: Tshs. {product && product.price.split(".")[0]}</p>
-            {/* Add more product details */}
+            <h5>Price: Tshs. {product && product.price.split(".")[0]}</h5>
             <p>Description: {product.description}</p>
-          </Col>
-        </Row>
-      )}
-
-      <Row className="my-5 justify-content-center">
-        <Col md={4}>
-          <Button
+            <Button
             type="button"
             disabled={product.qty === 0}
             as={Link}
+            variant='default'
             to={{
               pathname: "/checkout",
-              state: { total: product.price }, 
+              state: { total: Number(product.price)}, 
             }}
-            className="w-100"
-            style={{backgroundColor: '#2dace4'}}
+            style={{backgroundColor: '#2dace4', borderRadius: '1rem', color: "white"}}
           >
             Proceed to Checkout
           </Button>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

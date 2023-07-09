@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, FormControl, Pagination, Row } from 'react-bootstrap';
+import { Col, Container, FormControl, InputGroup, Pagination, Row } from 'react-bootstrap';
 import { CartState } from '../context/Context';
 import Filters from './Filters';
 import SingleProduct from './SingleProduct';
 import CarouselComponent from './CarouselComponent';
 import FilterModal from './FilterModal';
+import { BsSearch } from 'react-icons/bs';
 
 const Home = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 40;
+  const postsPerPage = 30;
   const maxPageNumbers = 5;
 
   const {
@@ -67,30 +68,16 @@ const Home = () => {
 
   return (
     <>
-      <section className="container">
-        <FormControl
-          type="search"
-          placeholder="Search for a product..."
-          className="m-auto form-control-lg"
-          aria-label="Search"
-          onChange={(e) => {
-            productDispatch({
-              type: 'FILTER_BY_SEARCH',
-              payload: e.target.value,
-            });
-          }}
-        />
-      </section>
       <br />
-      <Container>
-        <FilterModal />
-      </Container>
+      <Container className="d-flex justify-content-center align-items-center">
+      <FilterModal />
+    </Container>
       <br />
       <section>
         <Container>
           <Row>
             {currentPosts.map((prod) => (
-              <Col key={prod.id} lg={3} md={4} xs={6}>
+              <Col key={prod.id} lg={4} md={6} xs={12} className='mb-3'>
                 <SingleProduct prod={prod} />
                 <br />
               </Col>
@@ -131,8 +118,10 @@ const Home = () => {
           </Pagination>
         </div>
       </section>
+      
     </>
   );
 };
+
 
 export default Home;

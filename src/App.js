@@ -7,11 +7,13 @@ import BuyNow from "./components/BuyNow";
 import ProductDetails from "./components/ProductDetails";
 import Checkout from "./components/Checkout";
 
+
 function App() {
   return (
     <BrowserRouter >
       <div style={{backgroundColor: '#FAF9F6'}}>
         <Header />
+        <br/>
         <div className="App">
           <Route path="/" exact component={Home} />
           <Route path="/cart" component={Cart} />
@@ -20,6 +22,8 @@ function App() {
           <Route path="/checkout" component={Checkout} />
         </div>
       </div>
+      <hr/>
+     
     </BrowserRouter>
   );
 }
